@@ -61,7 +61,7 @@ session_start();
 <!-- <input type="button" value="Entrar" href="res.php" > -->
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<a class="btn btn-primary"  action="logout.php">Salir</a>
+<a class="btn btn-primary"   action="logout.php">Salir</a>
 <!-- <input type="button" value="Salir" action="res.php"> -->
 
 
