@@ -1,14 +1,30 @@
-<?  
-session_start();  
-if(!isset($_SESSION['s_username'])){  
-header("location: index.php");  
-} else {  
-session_unset();  
-session_destroy();  
-header("location: index.php");  
-}  
-?> 
-<?php require 'info.php'; ?>
+<?
+session_start();
+if(!isset($_SESSION['s_username'])){
+header("location: index.php");
+} else {
+session_unset();
+session_destroy();
+header("location: index.php");
+}
+?>
+<?php require 'info.php';
+
+session_start();
+// Borramos toda la sesion
+
+session_unset();
+
+//Para redireccionar simple a la pagina de login
+//header('Location: login.php');
+
+//O
+
+//Para redireccionar com parametros a la pagina de login
+$msj ='Seccion Cerrada';
+header('Location: bienv.php?mensaje=Seccion Cerrada');
+
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,19 +40,19 @@ header("location: index.php");
 
 <div id="principal">
 
-  <div id="cabecera"> 
-    <div id="titulo"> 
+  <div id="cabecera">
+    <div id="titulo">
       <center>
       <h1>Inventarios INCES</h1>
       </center>
     </div>
   </div>
-  
+
 <div id="menu">
 <ul>
-   <li><a href="../Compu-Soft/index.php">Inicio</a> 
+   <li><a href="../Compu-Soft/index.php">Inicio</a>
     </li>
-    <li><a href="#">Articulos</a> 
+    <li><a href="#">Articulos</a>
       <ul>
         <li><a href="../Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li>
 		<li><a href="../Compu-Soft/Registros/nuevo_ingreso.php">Ingreso De Articulos</a></li>
@@ -45,19 +61,19 @@ header("location: index.php");
 		<li><a href="../Compu-Soft/Borrar/borrar_art.php">Borrar Articulos</a></li>
         </ul>
     </li>
-	<li><a href="#">Reportes</a> 
+	<li><a href="#">Reportes</a>
       <ul>
         <li><a href="../Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
       <li><a href="../Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
-      <li><a href="../Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>   
+      <li><a href="../Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
        </ul>
     </li>
-	<li><a href="#">Copia De Seguridad</a> 
+	<li><a href="#">Copia De Seguridad</a>
       <ul>
         <li><a href="../Compu-Soft/Backup/backup.php">Realizar Copia</a></li>
         </ul>
     </li>
-	<li><a href="../Compu-Soft/creditos.php">Acerca De</a> 
+	<li><a href="../Compu-Soft/creditos.php">Acerca De</a>
     </li>
     </ul>
 </div>

@@ -56,6 +56,8 @@ session_start();
       <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
       <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
       <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
+      <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
+      <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
 	<li><a href="#">Copia De Seguridad</a> 
@@ -78,18 +80,18 @@ session_start();
 <center>
 	<form method="POST" action="movimiento_entrada.php" id="formulario" >
 	<!-- INICIO SECCION MOVIMIENTO DE CLIENTE!-->
-<fieldset><legend align="center"><b>Reporte de Entradas</b></legend>
+<fieldset><legend><b>Reporte de Entradas</b></legend>
 
    <table class="" width="89%" cellspacing=0 cellpadding=3 border=0>          
             <tr>
               <br><br>
               <td>Fecha de inicio</td>
-              <td><input id="fechainicio" type="text" class="cajaPequena" name="fechainicio" maxlength="10" value="<? echo $fechainicio?>" readonly>
+              <td><input id="fechainicio" type="text" class="cajaPequena" name="fechainicio" maxlength="10" value="<? echo $fechainicio?>" readonly placeholder="Haga click aqui" required autofocus="on">
         <script type="text/javascript">
           Calendar.setup(
             {
           inputField : "fechainicio",
-          ifFormat   : "%d/%m/%Y",
+          ifFormat   : "%Y/%m/%d",
           //button     : "Image1"
             }
           );
@@ -100,12 +102,12 @@ session_start();
             </tr>
             <tr>
               <td>Fecha de fin</td>
-              <td><input id="fechafin" type="text" class="cajaPequena" name="fechafin" maxlength="10" value="<? echo $fechafin?>" readonly>
+              <td><input id="fechafin" type="text" class="cajaPequena" name="fechafin" maxlength="10" value="<? echo $fechafin?>" readonly placeholder="Haga click aqui" required>
         <script type="text/javascript">
           Calendar.setup(
             {
           inputField : "fechafin",
-          ifFormat   : "%d/%m/%Y",
+          ifFormat   : "%Y/%m/%d",
           //button     : "Image1"
             }
           );
@@ -119,7 +121,7 @@ session_start();
   <input type="submit" name="consulta" value="Ver Movimiento" class="dos"/>
   </form>
 
--------
+
 </fieldset>
 <!-- FIN SECCION MOVIMIENTO  DE CLIENTE !-->
 
@@ -140,44 +142,52 @@ if (!$fechainicio)
   
   //comenzamos la consulta 
   //$consulta = "SELECT * FROM equipos WHERE marca like '%".$busqueda."%' ORDER BY marca ASC";
-  $consulta = "SELECT * FROM equipos WHERE '$fechainicio' >= '$fechafin'";
-  //$consulta = "SELECT * FROM equipos ";
+  $consulta = "SELECT * FROM mov_compu WHERE compu_fecha >= '$fechainicio' AND compu_fecha <= '$fechafin' AND compu_tipo = 'Ingreso' ORDER BY compu_fecha DESC"; //este
+
+  //no funciona
   $resultado = mysql_query($consulta) or die(mysql_error());
+  if ($resultado < 1){
+       print "<script>alert('No hay registro en esa fecha');</script>";
+
+  }
 
 ?>
 
 <table id="example" class="display" style="border:1px #FF0000; color:#000000; width:990px; text-align:center;" border="0">
 <tr style="background:#FFD700;">
-    <td>Descripcion</td>
+   <!--  <td>Descripcion</td> -->
   <td>Tipo</td>
-  <td>Serial</td>
-  <td>Proveedor</td>
-  <td>Cliente</td>
-  <!-- <td>Direccion</td> -->
-  <td>Telefono</td>
-<!--  <td>Garantia</td>
- -->  <td>Unidades</td>
-  <td>Precio</td>
+<!--   <td>Serial</td>
+ -->  <td>Proveedor</td>
+<!--   <td>Cliente</td>-->  
+<!-- <td>Direccion</td> -->
+<!--   <td>Telefono</td> -->
+<!--  <td>Garantia</td>-->  
+  <td>Unidades</td>
+  <td>Observacion</td>
   <td>Fecha Ingreso</td>
   </tr> 
 
 <?php  
+
+//echo "$fechainicio";
+echo "<br>";
   //mostramos los resultados
      while($row = mysql_fetch_array($resultado)){
   //while ('$fechainicio' >= '$fechafin'){ // infinito
      echo "<tr bgcolor='#FFFACD'>";
    //echo "     <td><a style=\"text-decoration:underline;cursor:pointer;\" onclick=\"pedirDatos('".$row['cli_id']."')\">".$row['cli_id']."</a></td>";
-     echo "     <td>".stripslashes($row["marca"])."</td>";
-   echo "     <td>".stripslashes($row["modelo"])."</td>";
-   echo "     <td>".stripslashes($row["serial"])."</td>";
-   echo "     <td>".stripslashes($row["proveedor"])."</td>";
-   echo "     <td>".stripslashes($row["cliente"])."</td>";
-//   echo "     <td>".stripslashes($row["dir"])."</td>";
-   echo "     <td>".stripslashes($row["tel"])."</td>";
-//   echo "     <td>".stripslashes($row["garantia"])."</td>";
-   echo "     <td>".stripslashes($row["cantidad"])."</td>";
-   echo "     <td>".stripslashes($row["publico"])."</td>";
-   echo "     <td>".stripslashes($row["fecha"])."</td>";
+     //echo "     <td>".stripslashes($row["compu_marca"])."</td>";
+   echo "     <td>".stripslashes($row["compu_modelo"])."</td>";
+   //echo "     <td>".stripslashes($row["serial"])."</td>";
+   echo "     <td>".stripslashes($row["compu_prov"])."</td>";
+   //echo "     <td>".stripslashes($row["cliente"])."</td>";
+    //echo "     <td>".stripslashes($row["dir"])."</td>";
+   //echo "     <td>".stripslashes($row["tel"])."</td>";
+  //echo "     <td>".stripslashes($row["garantia"])."</td>";
+   echo "     <td>".stripslashes($row["compu_qty"])."</td>";
+   echo "     <td>".stripslashes($row["compu_des"])."</td>";
+   echo "     <td>".stripslashes($row["compu_fecha"])."</td>";
      echo "</tr>";
    //echo "<br />";
    

@@ -63,6 +63,8 @@ $inicio = ($pagina - 1) * $registros;
       <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
       <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
       <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
+      <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
+      <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
 	<li><a href="#">Copia De Seguridad</a> 
@@ -101,10 +103,11 @@ $total_paginas = ceil($total_registros / $registros);
 ?>
 
 <center>
+<h2>Borrar Movimientos</h2>
 <table style="border:1px #FF0000; color:#000000; width:990px; text-align:center;">
 <tr style="background:#FFD700;">
 <?php
-echo "<td>Seleccionar</td><td>Item</td><td>Modelo</td><td>Marca</td><td>Tipo De Movimiento</td><td>Cantidad</td><td>Proveedor</td><td>Garantia</td><td>Serial</td><td>Descripcion</td><td>Fecha De Movimiento</td> \n"; 
+echo "<td>Seleccionar</td><td>Item</td><td>Modelo</td><td>Tipo De Movimiento</td><td>Cantidad</td><td>Proveedor</td><td>Observacion</td><td>Fecha De Movimiento</td> \n"; 
 ?>
 </tr>
 
@@ -116,12 +119,12 @@ $cont++;
 
 $mov_id =$row["mov_id"];
 $compu_modelo =$row["compu_modelo"];
-$compu_marca =$row["compu_marca"];
+//$compu_marca =$row["compu_marca"];
 $compu_tipo = $row["compu_tipo"];
 $compu_qty =$row["compu_qty"];
 $compu_prov =$row["compu_prov"];
-$compu_garantia =$row["compu_garantia"];
-$compu_serial =$row["compu_serial"];
+//$compu_garantia =$row["compu_garantia"];
+//$compu_serial =$row["compu_serial"];
 $compu_des =$row["compu_des"];
 $compu_fecha =$row["compu_fecha"];
 print "<tr bgcolor='#FFFACD'> "; //color de fondo de la fila
@@ -137,12 +140,12 @@ print "<td>
                                   //color de fondo de las letras
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$mov_id</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_modelo</font></font></div></td>";
-print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_marca</font></font></div></td>";
+//print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_marca</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_tipo</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_qty</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_prov</font></font></div></td>";
-print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_garantia</font></font></div></td>";
-print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_serial</font></font></div></td>";
+//print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_garantia</font></font></div></td>";
+//print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_serial</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_des</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$compu_fecha</font></font></div></td>";
 print "</tr>";

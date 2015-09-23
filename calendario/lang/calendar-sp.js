@@ -59,6 +59,7 @@ Calendar._TT["DAY_FIRST"] = "Pulse para primer dia de la semana";
 
 // date formats
 Calendar._TT["DEF_DATE_FORMAT"] = "dd-mm-yy";
+//Calendar._TT["DEF_DATE_FORMAT"] = "yy-mm-dd";	//yo modf
 Calendar._TT["TT_DATE_FORMAT"] = "%A, %e de %B de %Y";
 
 Calendar._TT["WK"] = "Smn";

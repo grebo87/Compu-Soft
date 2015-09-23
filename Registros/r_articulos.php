@@ -13,11 +13,11 @@ $error = array(); //Validar Campos
 
 // INICIO  construccion de la consulta con los CLIENTES-->
 	      //$sql_celular = "SELECT `modelo` FROM `equipos`"; //original
-        $sql_celular = "SELECT modelo FROM equipos"; 
-	      $result_celular = mysql_query($sql_celular)or die(mysql_error()); 
-	      $options_celular = ''; 
+        $sql_celular = "SELECT modelo FROM equipos";
+	      $result_celular = mysql_query($sql_celular)or die(mysql_error());
+	      $options_celular = '';
 	    while ($row_celular = mysql_fetch_array($result_celular))
-		{	$options_celular = $options_celular.'<option value="'.$row_celular['modelo'].'">'.'</option>'; } 
+		{	$options_celular = $options_celular.'<option value="'.$row_celular['modelo'].'">'.'</option>'; }
 // FIN  construccion de la consulta con los CLIENTES-->
 
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "formulario")) {
@@ -62,8 +62,9 @@ $error['garantia']= 'El Campo Garantia No Se Puede Dejar Vacio';
 if(!$error){ //Validar Campos
 
   $SQL = "INSERT INTO equipos (modelo, marca, proveedor, cantidad, des, fecha, base, publico, cliente, dir, tel) VALUES ('$modelo', '$marca', '$proveedor', '$cantidad', '$des', '$fecha', '$base', '$publico', '$cliente', '$dir', '$tel')";
-                 
+
    $Result = mysql_query($SQL) or die ( "<center>El Equipo Ya Existe!!! <br><a href=\"javascript:history.back()\">Regresar</a></center>");//or die(mysql_error());
+   //$Result = mysql_query($SQL) or die ( "<center>El Equipo Ya Existe!!! <br><a href=\"javascript:history.back()\">Regresar</a></center>");
 echo "<script language='JavaScript'> alert('La operacion ha resultado satisfactoria'); </script>";
 //print('<meta http-equiv="refresh" content="0; URL=../Registros/r_articulos.php">');
 
@@ -86,22 +87,22 @@ echo "<script language='JavaScript'> alert('La operacion ha resultado satisfacto
 
 <div id="principal">
 
-  <div id="cabecera"> 
-    <div id="titulo"> 
+  <div id="cabecera">
+    <div id="titulo">
       <div id="logout">
-        <?php 
-        echo "Bienvenido <b>".$_SESSION['s_username']."</b> "; 
+        <?php
+        echo "Bienvenido <b>".$_SESSION['s_username']."</b> ";
         ?>
       </div>
     </div>
   </div>
-  
+
 
 <div id="menu">
 <ul>
-   <li><a href="/Compu-Soft/index.php">Inicio</a> 
+   <li><a href="/Compu-Soft/index.php">Inicio</a>
     </li>
-    <li><a href="#">Articulos</a> 
+    <li><a href="#">Articulos</a>
       <ul>
         <li><a href="/Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li>
     <li><a href="/Compu-Soft/Registros/nuevo_ingreso.php">Ingreso De Articulos</a></li>
@@ -110,23 +111,25 @@ echo "<script language='JavaScript'> alert('La operacion ha resultado satisfacto
     <li><a href="/Compu-Soft/Borrar/borrar_art.php">Borrar Articulos</a></li>
         </ul>
     </li>
-  <li><a href="#">Reportes</a> 
+  <li><a href="#">Reportes</a>
       <ul>
         <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
         <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
         <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
+        <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
+        <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
-  <li><a href="#">Copia De Seguridad</a> 
+  <li><a href="#">Copia De Seguridad</a>
       <ul>
         <li><a href="/Compu-Soft/Backup/backup.php">Realizar Copia</a></li>
         </ul>
     </li>
-  <li><a href="/Compu-Soft/creditos.php">Acerca De</a> 
+  <li><a href="/Compu-Soft/creditos.php">Acerca De</a>
     </li>
 
     </li>
-    <li><a href="../logout.php">Salir</a> 
+    <li><a href="../logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;">Salir</a>
     </li>
     </ul>
 </div><!--fin menu-->
@@ -139,29 +142,30 @@ echo "<script language='JavaScript'> alert('La operacion ha resultado satisfacto
 		<legend>Nuevo Articulo</legend>
 
 		<label><b>Descripcion:</b>
-		<input value="<? echo $_POST['marca'] ?>" name="marca" type="text" autofocus/></label>
+		<input value="<?php echo $_POST['marca'] ?>" name="marca" type="text" autofocus placeholder="Ingrese..."/></label>
 		<label><b>Tipo:</b>
-		<input value="<? echo $_POST['modelo'] ?>" name="modelo" type="text" /></label>
+		<input value="<?php echo $_POST['modelo'] ?>" name="modelo" type="text" placeholder="Ingrese..."/></label>
 		<!-- <label><b>Serial:</b>
 		<input value="<? //echo $_POST['serial'] ?>" name="serial" type="text" /></label> -->
 		<label><b>Unidades:</b>
-		<input value="<? echo $_POST['cantidad'] ?>" name="cantidad" type="text" /></label> 
+		<input value="<? echo $_POST['cantidad'] ?>" name="cantidad" type="text" placeholder="Ingrese..."/></label>
 		<!-- <label><b>Precio Base:</b>
        <input value="<? //echo $_POST['base'] ?>" name="base" type="text" /></label>
-	   <label><b>Precio Publico:</b> 
+	   <label><b>Precio Publico:</b>
        <input value="<? //echo $_POST['publico'] ?>" name="publico" type="text" /></label>
-    -->
+   -->
        <label><b>Proveedor:</b>
-       <input value="<? echo $_POST['proveedor'] ?>" name="proveedor" type="text" /></label>
-       <label><b>Cliente:</b>
-       <input value="<? echo $_POST['cliente'] ?>" name="cliente" type="text" /></label>	   
+       <input value="<? echo $_POST['proveedor'] ?>" name="proveedor" type="text" placeholder="Ingrese..."/></label>
+      <!-- <label><b>Cliente:</b>
+       <input value="<? //echo $_POST['cliente'] ?>" name="cliente" type="text" /></label>
        	<label><b>Direccion:</b>
-		<input value="<? echo $_POST['dir'] ?>" name="dir" type="text" /></label>
+		<input value="<? //echo $_POST['dir'] ?>" name="dir" type="text" /></label>
 		<label><b>Telefono:</b>
-		<input value="<? echo $_POST['tel'] ?>" name="tel" type="text" /></label>
-		<!-- <label><b>Garantia:</b>
+		<input value="<? //echo $_POST['tel'] ?>" name="tel" type="text" /></label>
+
+		 <label><b>Garantia:</b>
 		<input value="<? //echo $_POST['garantia'] ?>" name="garantia" type="text" /></label> -->
-<!-- 		<label><b>Fecha De Ingreso:</b>-->        
+<!-- 		<label><b>Fecha De Ingreso:</b>-->
     <input value="<? echo date("Y-m-d h:i:s A"); ?>" name="fecha" type="hidden" /></label><br />
 		<label for="enviar"></label>
         <input type="submit" name="enviar" id="enviar" value="Grabar" class="uno"/>
@@ -171,7 +175,7 @@ echo "<script language='JavaScript'> alert('La operacion ha resultado satisfacto
     <input type="hidden" name="MM_insert" value="formulario" />
 </form>
 
- 
+
 <?php if ($error) { //validar campos
 ?>
 <p>&nbsp;</p>
@@ -187,4 +191,3 @@ foreach ($error as $alerta) {
 
 </body>
 </html>
-

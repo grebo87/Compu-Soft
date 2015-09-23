@@ -61,10 +61,10 @@ Calendar.setup = function (params) {
 	param_default("displayArea",    null);
 	param_default("button",         null);
 	param_default("eventName",      "click");
-	//param_default("ifFormat",       "%Y/%m/%d");  //formato anio mes dia
-	//param_default("daFormat",       "%Y/%m/%d");
-	param_default("ifFormat",       "%d/%m/%Y");
-	param_default("daFormat",       "%d/%m/%Y");
+	param_default("ifFormat",       "%Y/%m/%d");  //formato anio mes dia
+	param_default("daFormat",       "%Y/%m/%d");
+	//param_default("ifFormat",       "%d/%m/%Y");
+	//param_default("daFormat",       "%d/%m/%Y");
 	param_default("singleClick",    true);
 	param_default("disableFunc",    null);
 	param_default("dateStatusFunc", params["disableFunc"]);	// takes precedence if both are defined

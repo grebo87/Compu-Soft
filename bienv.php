@@ -4,7 +4,12 @@ session_start();
         header("Location: index.php");
     }
 ?>
-<?php require 'info.php'; ?>
+<?php require 'info.php';
+
+      if($_GET['mensaje']){
+        echo "<script>alert('".$_GET['mensaje']."');</script>";
+          }
+ ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -21,32 +26,32 @@ session_start();
 <body>
 
 <div id="principal">
-  <div id="cabecera"> 
-    <div id="titulo"> 
+  <div id="cabecera">
+    <div id="titulo">
       <div id="logout">
         <?php
-        //echo "Bienvenido <b>".$_SESSION['s_username']."</b> "; 
+        //echo "Bienvenido <b>".$_SESSION['s_username']."</b> ";
         ?>
       </div>
-      
+
     </div>
   </div>
-  
+
 <div id="menu">
 <ul>
-	<!-- <li><a href="../Compu-Soft/creditos.php">Acerca De</a> 
+	<!-- <li><a href="../Compu-Soft/creditos.php">Acerca De</a>
     </li> -->
 
- <!--  <li><a href="../Compu-Soft/logout.php">Salir</a> 
+ <!--  <li><a href="../Compu-Soft/logout.php">Salir</a>
     </li> -->
     </ul>
 </div><!--fin menu-->
 
 <div id="" align="center">
 
-  
+
     <div id="bienvenido" align="center" class=""><br><br><br<b>BIENVENIDO</b><br><br></div>
-  
+
   <img class="btn" align="center" src="img/principal.png" WIDTH="150"  HEIGHT="140" alt="INCES" />
 </div>
 
@@ -56,12 +61,12 @@ session_start();
 <!-- <input type="button" value="Entrar" href="res.php" > -->
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-<a class="btn btn-primary" action="logout.php">Salir</a>
+<a class="btn btn-primary"  action="logout.php">Salir</a>
 <!-- <input type="button" value="Salir" action="res.php"> -->
 
 
 </div>
-     
+
 </div><!--fin principal-->
 <p>&nbsp;</p>
 <p>&nbsp;</p>

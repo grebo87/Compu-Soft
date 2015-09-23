@@ -46,11 +46,11 @@ session_start();
     </li>
 	<li><a href="#">Reportes</a> 
       <ul>
-    <li><a href="../Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
-		<li><a href="../Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
-    <li><a href="../Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
-    <li><a href="../Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
-    <li><a href="../Compu-Soft/Movimientos/movimiento_compu2.php">Salida</a></li>
+    <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
+		<li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
+    <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
+    <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
+    <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
 	<li><a href="#">Copia De Seguridad</a> 
@@ -62,7 +62,7 @@ session_start();
     </li>
 
     </li>
-  <li><a href="../Compu-Soft/logout.php">Salir</a> 
+  <li><a href="../Compu-Soft/logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;" >Salir</a> 
     </li>
     </ul>
 </div><!--fin menu-->

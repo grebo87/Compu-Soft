@@ -51,6 +51,8 @@ session_start();
         <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
 		<li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
 		<li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
+		<li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
+    	<li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
 	<li><a href="#">Copia De Seguridad</a> 
@@ -80,13 +82,13 @@ $movimiento = mysql_query($query_movimiento) or die ( "Error en query: $sql, el 
 $row_movimiento = mysql_fetch_assoc($movimiento);
 $totalRows_movimiento = mysql_num_rows($movimiento);
 
-$query_des = ("SELECT * FROM mov_compu WHERE  compu_modelo = '".$criterio."' ORDER BY compu_fecha ASC" );
+$query_des = ("SELECT * FROM mov_compu WHERE  compu_modelo = '".$criterio."' ORDER BY compu_fecha DESC" );
 $des = mysql_query($query_des) or die ( "Error en query: $sql, el error  es: " . mysql_error() );//(mysql_error());
 $row_des = mysql_fetch_assoc($des);
 ?>
 
-
 <center>
+<h2>Movimientos Articulos</h2>
 <table style="border:1px #FF0000; color:#000000; width:990px; text-align:center;">
 <tr style="background:#FFD700;">
 	<td>Tipo</td>
@@ -95,9 +97,9 @@ $row_des = mysql_fetch_assoc($des);
 	<td>Tipo De Movimiento</td>
 	<td>Proveedor</td>
 	<!-- <td>Cliente</td> -->
-	<td>Garantia</td>
+<!-- 	<td>Garantia</td> -->
 	<td>Observacion</td>
-	<td>Serial</td>
+<!-- 	<td>Serial</td>-->	
 	<td>Fecha Movimiento</td>
 		
 	
@@ -110,9 +112,9 @@ $row_des = mysql_fetch_assoc($des);
 	  <td><?php echo $row_des['compu_tipo']; ?></td>
 	  <td><?php echo $row_des['compu_prov']; ?></td>
 	  <!-- <td><?php //echo $row_des['compu_cli']; ?></td> -->
-	  <td><?php echo $row_des['compu_garantia']; ?></td>
+	  <!-- <td><?php //echo $row_des['compu_garantia']; ?></td> -->
 	  <td><?php echo $row_des['compu_des']; ?></td>
-	  <td><?php echo $row_des['compu_serial']; ?></td>
+	  <!-- <td><?php //echo $row_des['compu_serial']; ?></td> -->
 	  <td><?php echo $row_des['compu_fecha']; ?></td>
 	  	  
 	</tr>
@@ -123,8 +125,8 @@ $row_des = mysql_fetch_assoc($des);
 	<td></td>
 	<td></td>
 	<td></td>
-	<td></td>
-	<td></td>
+	<!-- <td></td>
+	<td></td> -->
 	<!-- <td></td> -->
 	<!-- <td></td> -->
 	    <td bgcolor='#FFD700'><label><b>Cantidad Actual:</b></label></td>

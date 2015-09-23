@@ -10,7 +10,7 @@ session_start();
 
 <?php
 //inicio paginador
-$registros = 20; 
+$registros = 20;
 
 $pagina = $_GET["pagina"];
 
@@ -20,7 +20,7 @@ $pagina = 1;
 }
 else {
 $inicio = ($pagina - 1) * $registros;
-} 
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -35,21 +35,21 @@ $inicio = ($pagina - 1) * $registros;
 
 <div id="principal">
 
-  <div id="cabecera"> 
-    <div id="titulo"> 
+  <div id="cabecera">
+    <div id="titulo">
       <div id="logout">
-        <?php 
-        echo "Bienvenido <b>".$_SESSION['s_username']."</b> "; 
+        <?php
+        echo "Bienvenido <b>".$_SESSION['s_username']."</b> ";
         ?>
       </div>
     </div>
   </div>
-  
+
 <div id="menu">
 <ul>
-   <li><a href="/Compu-Soft/index.php">Inicio</a> 
+   <li><a href="/Compu-Soft/index.php">Inicio</a>
     </li>
-    <li><a href="#">Articulos</a> 
+    <li><a href="#">Articulos</a>
       <ul>
         <li><a href="/Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li>
 		<li><a href="/Compu-Soft/Registros/nuevo_ingreso.php">Ingreso De Articulos</a></li>
@@ -58,24 +58,26 @@ $inicio = ($pagina - 1) * $registros;
 		<li><a href="/Compu-Soft/Borrar/borrar_art.php">Borrar Articulos</a></li>
         </ul>
     </li>
-	<li><a href="#">Reportes</a> 
+	<li><a href="#">Reportes</a>
       <ul>
         <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
         <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
         <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
+        <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
+        <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
-	<li><a href="#">Copia De Seguridad</a> 
+	<li><a href="#">Copia De Seguridad</a>
       <ul>
         <li><a href="/Compu-Soft/Backup/backup.php">Realizar Copia</a></li>
         </ul>
     </li>
-	<li><a href="/Compu-Soft/creditos.php">Acerca De</a> 
+	<li><a href="/Compu-Soft/creditos.php">Acerca De</a>
     </li>
 
-    
+
     </li>
-    <li><a href="../logout.php">Salir</a> 
+    <li><a href="../logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;">Salir</a> 
     </li>
     </ul>
 </div>
@@ -92,15 +94,16 @@ print "<form action ='borrar_art.php' method='post'>";
 
 //$result = mysql_query("SELECT * FROM clientes ORDER BY cli_nombre ASC");
 
-//inicio consulta 
+//inicio consulta
 $resultados = mysql_query("SELECT * FROM equipos WHERE 'visible' = 0");
 $total_registros = mysql_num_rows($resultados) or die ( "<center>No Existen Registros!!! <br><a href=\"javascript:history.back()\">Regresar</a></center>"); //or die ( "Error en query: $sql, el error  es: " . mysql_error());
 $resultados = mysql_query("SELECT * FROM equipos WHERE 'visible' = 0 ORDER BY modelo ASC LIMIT $inicio, $registros");
-$total_paginas = ceil($total_registros / $registros); 
-//fin consulta 
+$total_paginas = ceil($total_registros / $registros);
+//fin consulta
 ?>
 
 <center>
+<h2>Borrar Articulos</h2>
 <table style="border:1px #FF0000; color:#000000; width:990px; text-align:center;">
 <tr style="background:#FFD700;">
 <?php
@@ -109,8 +112,8 @@ echo "<td>Seleccionar</td>
   <td>Marca</td>
   <td>Proveedor</td>
   <td>Unidades</td>
-  <td>Observacio</td>
-  <td>Fecha De Ingreso</td> \n"; 
+
+  <td>Fecha De Ingreso</td> \n";
 ?>
 </tr>
 
@@ -134,7 +137,7 @@ print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$marca</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$proveedor</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$cantidad</font></font></div></td>";
-print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$des</font></font></div></td>";
+//print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$des</font></font></div></td>";
 print "<td> <div align=\"center\"><font color=\"#000000\"><font size=\"3\"><font face=\"Verdana\">$fecha</font></font></div></td>";
 print "</tr>";
 
@@ -157,7 +160,7 @@ $res = mysql_query($sql);
 //paginador
 if(($pagina - 1) > 0) {
 echo "<a href='borrar_cel.php?pagina=".($pagina-1)."'>< Anterior</a> ";
-} 
+}
 
 for ($i=1; $i<=$total_paginas; $i++){
 if ($pagina == $i) {
@@ -168,9 +171,9 @@ echo "<a href='borrar_cel.php?pagina=$i'>$i</a> ";
 
 if(($pagina + 1)<=$total_paginas) {
 echo " <a href='borrar_cel.php?pagina=".($pagina+1)."'>Siguiente ></a>";
-} 
+}
 //fin paginador
-?> 
+?>
 </center>
 </table><br />
 </body>

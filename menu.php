@@ -41,7 +41,6 @@ session_start();
         <li><a href="/Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li>
 		<li><a href="/Compu-Soft/Registros/nuevo_ingreso.php">Ingreso De Articulos</a></li>
 		<li><a href="/Compu-Soft/Registros/nueva_salida.php">Salida De Articulos</a></li>
- 		<li><a href="/Compu-Soft/Buscar/buscar_art.php">Buscar Articulos</a></li>
 		<li><a href="/Compu-Soft/Borrar/borrar_art.php">Borrar Articulos</a></li>
         </ul>
     </li>
@@ -62,7 +61,7 @@ session_start();
     </li>
 
     </li>
-    <li><a href="../logout.php">Salir</a> 
+    <li><a href="../logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;" >Salir</a> 
     </li>
     </ul>
 </div>
