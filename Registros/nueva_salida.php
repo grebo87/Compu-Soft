@@ -86,10 +86,11 @@ $fecha = date('Y-m-d H:i:s',$tiempo);
 	// tipo de movimiento I = ingreso , S = salida, oculto.
 	echo '<input type="hidden" name="tipo" value="Salida" />';
 	 // select con los nombres de los clientes, elije nombre y envia id.
-	//echo '<label><b>Descripcion:</b> <select name="marca[]">'.$options_marca.'</select></label>';
+	
+	echo '<label><b>Tipo:</b> <select id="modelo" onchange="descripcion();" name="modelo[]">'.$options_tipo.'</select></label>';
 	//descripcion articulo
-	echo '<label><b>Tipo:</b> <select name="modelo[]">'.$options_prd.'</select></label>';
-	//descripcion articulo
+  echo '<label><b>Descripcion:</b> <select id="marca" name="marca[]">'.$options_descripcion.'</select></label>';
+  //descripcion articulo
 	echo '<label>&nbsp;&nbsp;&nbsp;<b>Unidades:</b> <input type="text" name="qty[]" size="30" maxlength="10" aoutofocus onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label>';
 	// campo para ingresar tipo de movimiento.
 	echo '<label>&nbsp;&nbsp;&nbsp;<b>Solicitante:</b> <input type="text" name="cli[]" size="30" maxlength="30" onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label>';
@@ -116,5 +117,18 @@ $fecha = date('Y-m-d H:i:s',$tiempo);
         </fieldset>
     </form>
 </center>
+<script type="text/javascript" src="../js/jquery.js" ></script>
+<script>
+  function descripcion() {
+    $.ajax({
+                data:  { tipo : $("#modelo").val() },
+                url:   'descripcion.php',
+                type:  'post',
+                success:  function (response) {
+                        $("#marca").html(response);
+                }
+        });
+  }
+</script>
 </body>
 </html>

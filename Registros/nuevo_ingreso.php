@@ -17,124 +17,122 @@ session_start();
 
 <link href="../menu.css" rel="stylesheet" type="text/css" />
 <link href="../form.css" rel="stylesheet" type="text/css" />
+<!-- scritp para el calendario -->
+<link href="../calendario/calendar-blue.css" rel="stylesheet" type="text/css">
+<script type="text/JavaScript" language="javascript" src="../calendario/calendar.js"></script>
+<script type="text/JavaScript" language="javascript" src="../calendario/lang/calendar-sp.js"></script>
+<script type="text/JavaScript" language="javascript" src="../calendario/calendar-setup.js"></script>
+<script language="javascript">
+function tipo() {
+      location.href="tipo.php";
+    }
+
+</script>  
 </head>
 
 <body>
 
 <div id="principal">
 
-  <div id="cabecera">
-    <div id="titulo">
+  <div id="cabecera"> 
+    <div id="titulo"> 
       <div id="logout">
-        <?php
-        echo "Bienvenido <b>".$_SESSION['s_username']."</b> ";
+        <?php 
+        echo "Bienvenido <b>".$_SESSION['s_username']."</b> "; 
         ?>
       </div>
     </div>
   </div>
-
-
+  
 <div id="menu">
 <ul>
-   <li><a href="/Compu-Soft/index.php">Inicio</a>
+   <li><a href="/Compu-Soft/index.php">Inicio</a> 
     </li>
-    <li><a href="#">Articulos</a>
+    <li><a href="#">Registro</a> 
       <ul>
-        <li><a href="/Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li>
     <li><a href="/Compu-Soft/Registros/nuevo_ingreso.php">Ingreso De Articulos</a></li>
     <li><a href="/Compu-Soft/Registros/nueva_salida.php">Salida De Articulos</a></li>
-
     <li><a href="/Compu-Soft/Buscar/buscar_art.php">Buscar Articulos</a></li>
     <li><a href="/Compu-Soft/Borrar/borrar_art.php">Borrar Articulos</a></li>
         </ul>
     </li>
-  <li><a href="#">Reportes</a>
+  <li><a href="#">Reportes</a> 
       <ul>
-        <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
-        <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
-        <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
-        <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
-        <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
+    <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
+    <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
+    <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
-  <li><a href="#">Copia De Seguridad</a>
+    <li><a href="#">Configuracion</a> 
       <ul>
-        <li><a href="/Compu-Soft/Backup/backup.php">Realizar Copia</a></li>
+        <li><a href="/Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li> 
+        <li><a href="/Compu-Soft/Registros/tipo.php">Nuevo Tipo</a></li>
+        <li><a href="/Compu-Soft/Borrar/borrar_tipo.php">Borrar Tipo</a></li>
+        <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
+        <li><a href="/Compu-Soft/Backup/backup.php">Copia de Seguridad</a></li>
         </ul>
     </li>
-  <li><a href="/Compu-Soft/creditos.php">Acerca De</a>
+  <li><a href="/Compu-Soft/creditos.php">Acerca De</a> 
     </li>
 
     </li>
-    <li><a href="../logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;">Salir</a> 
+  <li><a href="/Compu-Soft/logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;" >Salir</a> 
     </li>
     </ul>
 </div><!--fin menu-->
-</div>
+
+
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
 <center>
-	<form method="post" action="nuevo_ingreso2.php" name="formulario" id="formulario" autocomplete="off">
-	<fieldset>
-	<legend>Ingreso De Articulos</legend>
-<?php
+<form method="POST" action="nuevo_ingreso2.php" name="formulario" id="formulario" autocomplete="off">
 
-$horas_diferencia=0;
-$tiempo=time() + ($horas_diferencia * 60 *60);
-//$fecha = date('Y-m-d H:i:s',$tiempo); //fecha y hora
-$fecha = date('Y-m-d');
-//en mysql debe ser typo date qie es el formato para fecha
-//no datetime, que es el formato fecha y hora
-
-    // INICIO construccion de los campos para ingresar los datos de los clientes.
-	// tipo de movimiento I = ingreso , S = salida, oculto.
-	echo '<input type="hidden" name="tipo" value="Ingreso" />';
-	 // select con los nombres de los clientes, elije nombre y envia id.
-	//descripcion articulo
-	echo '<label><b>Tipo:</b> <select name="modelo[]">'.$options_prd.'</select></label>';
-
-  //echo '<label><b>Descripcion:</b> <select name="marca[]">'.$options_marca.'</select></label>';
-  /*echo '<label><b>Descripcion:</b></label>';    //seleccione la descripcion de acuerdo al tipo
-    $consulta = "SELECT * FROM equipos";
-    $resultado = mysql_query($consulta) or die(mysql_error());
-    $option='';
-    while($row = mysql_fetch_array($resultado)){
-      $option.="<option value='".$marca['marca']."'>".$marca['marca']."</option>";
-
-    } ;
-    echo '<select id="marca" name="marca" >';
-    echo '<option value="" selected>Seleccione </option>';
-    echo $option;
-    echo "</select >";
-
-    */
-
-	//descripcion articulo
-	echo '<label>&nbsp;&nbsp;&nbsp;<b>Unidades:</b> <input type="number" name="qty[]" size="30" maxlength="10" autofocus onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label>';
-	// campo para ingresar tipo de movimiento.
-	echo '<label>&nbsp;&nbsp;&nbsp;<b>Proveedor:</b> <input type="text" name="prov[]" size="30" maxlength="30" onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label>';
-	// campo para ingresar tipo de movimiento.
-	echo '<label>&nbsp;&nbsp;&nbsp;<b>Observacion:</b> <input type="text" name="des[]" size="10" maxlength="30" onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label>';
-	// campo de text para ingresar el Valor Abono.
-	//echo '<label>&nbsp;&nbsp;&nbsp;<b>Serial:</b> <input type="text" name="serial[]" size="30" maxlength="30" onkeypress="return permite(event, \'num\')" /></label>';
-	// campo de text para ingresar la Cantidad De Cuotas.
-	//echo '<label>&nbsp;&nbsp;&nbsp;<b>Grarantia:</b> <input type="text" name="garantia[]" size="10" maxlength="20" onkeypress="return permite(event, \'num\')" /></label>';
-	// campo de text para ingresar el Interes Por Mora.
-	echo '<label>&nbsp;&nbsp;&nbsp;<input value=" '.$fecha.' " name="fecha[]" type="hidden" /></label>';
-	// salto de linea ;-P
-	echo '<br />';
-
- ?>
-<!--// FIN construccion de los campos para ingresar los datos de los clientes.-->
+<fieldset><legend>Ingreso De Articulos</legend>
+<?php  $tipo= "nombre_tipo[]";?>
 
 
-	<br>
-		<label for="ingreso"></label>
+          <table class="" width="89%" cellspacing=0 cellpadding=0 border=0>          
+            <tr>
+              <br><br>
+              <td>Tipo:</td>
+              <?php echo '<label><input type="hidden" name="tipo_m" value="Ingreso" /></label> ';?>
+              <td><?php echo '<label><select name="nombre_tipo[]">'.$options_tipo.'</select></label> ';?></td>
+              <td><img src="../img/add.png" width="15" height="15" border="1" onClick="tipo()" onMouseOver="style.cursor=cursor"></td>
+            </tr>
+
+            <tr>
+              <td>Unidades:</td>
+              <td><?php echo '<label><input type="number" name="unidades[]" size="30" maxlength="10" autofocus onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label> ';?>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Descripcion:</td>
+              <td><?php echo '<label><input type="text" name="des[]" size="10" maxlength="30" onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label> ';?></td>
+            </tr>
+
+            <tr>
+              <td>Observacion:</td>
+              <td><?php echo '<label><input type="text" name="obser[]" size="30" maxlength="30" onkeypress="return permite(event, \'num\')" placeholder="Ingrese..." required /></label> ';?></td>
+            </tr>
+
+            <tr>
+              <td>    <input value="<?php echo date("Y-m-d h:i:s A"); ?>" name="fecha" type="hidden" /></label><br /></td>
+
+            </tr>
+          </table>
+  <br>
+  <label for="ingreso"></label>
         <input type="submit" name="aceptar" id="aceptar" value="Enviar" class="uno"/>
-		    <input type="reset" name="borrar" id="borrar" value="Borrar Formulario" class="uno"/>
-        <label for="borrar"></label>
-        </fieldset>
-    </form>
+        <input type="reset" name="borrar" id="borrar" value="Borrar Formulario" class="uno"/>
+        <label for="borrar">
+  </label>
+</form>
+
+
+</fieldset>
+  
 </center>
 </body>
 </html>
