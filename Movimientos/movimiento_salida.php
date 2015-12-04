@@ -69,7 +69,7 @@ session_start();
     </li>
 
     </li>
-    <li><a href="/Compu-Soft/logout.php">Salir</a> 
+    <li><a href="/Compu-Soft/logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;" >Salir</a>  
     </li>
     </ul>
 </div>
@@ -86,12 +86,12 @@ session_start();
             <tr>
               <br><br>
               <td>Fecha de inicio</td>
-              <td><input id="fechainicio" type="text" class="cajaPequena" name="fechainicio" maxlength="10" value="<? echo $fechainicio?>" readonly>
+              <td><input id="fechainicio" type="text" class="cajaPequena" name="fechainicio" maxlength="10" value="<?php echo $fechainicio?>" readonly>
         <script type="text/javascript">
           Calendar.setup(
             {
           inputField : "fechainicio",
-          ifFormat   : "%Y/%m/%d",
+          ifFormat   : "%Y-%m-%d",
           //button     : "Image1"
             }
           );
@@ -102,12 +102,12 @@ session_start();
             </tr>
             <tr>
               <td>Fecha de fin</td>
-              <td><input id="fechafin" type="text" class="cajaPequena" name="fechafin" maxlength="10" value="<? echo $fechafin?>" readonly>
+              <td><input id="fechafin" type="text" class="cajaPequena" name="fechafin" maxlength="10" value="<?php echo $fechafin?>" readonly>
         <script type="text/javascript">
           Calendar.setup(
             {
           inputField : "fechafin",
-          ifFormat   : "%Y/%m/%d",
+          ifFormat   : "%Y-%m-%d",
           //button     : "Image1"
             }
           );
@@ -137,21 +137,17 @@ if (!$fechainicio)
   }
 */
   $salida = "Salida";
-  $fechainicio = addslashes($fechainicio); //Marca una cadena con barras
-  $fechafin = addslashes($fechafin); //Marca una cadena con barras
+  $fechainicio = $_POST['fechainicio']; //Marca una cadena con barras
+  $fechafin = $_POST['fechafin']; //Marca una cadena con barras
   $salida = addslashes($salida); //Marca una cadena con barras
 
   
   //comenzamos la consulta 
-  //$consulta = "SELECT * FROM equipos WHERE marca like '%".$busqueda."%' ORDER BY marca ASC";
-  $consulta = "SELECT * FROM mov_compu WHERE compu_fecha >= '$fechainicio' AND compu_fecha <= '$fechafin' AND compu_tipo ='Salida' ORDER BY compu_fecha DESC"; //este
-//SELECT * FROM mov_compu WHERE compu_fecha >= "2015-09-01 21:03:01" AND compu_fecha <= "2015-09-02 19:02:42"  //de prueva en el sql
-//  $consulta = ("SELECT * FROM mov_compu WHERE  compu_tipo = 'Ingreso' ORDER BY compu_fecha ASC" );
-
-  //$consulta = "SELECT * FROM equipos ";
-
+  $consulta = "SELECT * FROM  `reporte` WHERE  `compu_fecha` BETWEEN  '$fechainicio' AND  '$fechafin' AND  `tipo_m` =  'Salida' ORDER BY compu_fecha DESC "; //este
+ 
   //no funciona
   $resultado = mysql_query($consulta) or die(mysql_error());
+  
   if ($resultado < 1){
        print "<script>alert('No hay registro en esa fecha');</script>";
 
@@ -179,18 +175,19 @@ if (!$fechainicio)
 echo "<br>";
   //mostramos los resultados
      while($row = mysql_fetch_array($resultado)){
+       
   //while ('$fechainicio' >= '$fechafin'){ // infinito
      echo "<tr bgcolor='#FFFACD'>";
    //echo "     <td><a style=\"text-decoration:underline;cursor:pointer;\" onclick=\"pedirDatos('".$row['cli_id']."')\">".$row['cli_id']."</a></td>";
      //echo "     <td>".stripslashes($row["compu_marca"])."</td>";
-   echo "     <td>".stripslashes($row["compu_modelo"])."</td>";
+   echo "     <td>".stripslashes($row["compu_tipo"])."</td>";
    //echo "     <td>".stripslashes($row["serial"])."</td>";
    echo "     <td>".stripslashes($row["compu_cli"])."</td>";
    //echo "     <td>".stripslashes($row["cliente"])."</td>";
     //echo "     <td>".stripslashes($row["dir"])."</td>";
    //echo "     <td>".stripslashes($row["tel"])."</td>";
   //echo "     <td>".stripslashes($row["garantia"])."</td>";
-   echo "     <td>".stripslashes($row["compu_qty"])."</td>";
+   echo "     <td>".stripslashes($row["compu_unidades"])."</td>";
    echo "     <td>".stripslashes($row["compu_des"])."</td>";
    echo "     <td>".stripslashes($row["compu_fecha"])."</td>";
      echo "</tr>";
@@ -200,7 +197,7 @@ echo "<br>";
 ?>
 
 
-  
+  </table>
 </center>
 </body>
 </html>

@@ -42,9 +42,8 @@ session_start();
 <ul>
    <li><a href="/Compu-Soft/index.php">Inicio</a> 
     </li>
-    <li><a href="#">Articulos</a> 
+    <li><a href="#">Registro</a> 
       <ul>
-        <li><a href="/Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li>
 		<li><a href="/Compu-Soft/Registros/nuevo_ingreso.php">Ingreso De Articulos</a></li>
 		<li><a href="/Compu-Soft/Registros/nueva_salida.php">Salida De Articulos</a></li>
 		<li><a href="/Compu-Soft/Buscar/buscar_art.php">Buscar Articulos</a></li>
@@ -53,23 +52,25 @@ session_start();
     </li>
 	<li><a href="#">Reportes</a> 
       <ul>
-      <li><a href="/Compu-Soft/Movimientos/movimiento_compu.php">Ver Movimientos</a></li>
-      <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
       <li><a href="/Compu-Soft/Movimientos/movimiento_compu2.php">Inventario General</a></li>
       <li><a href="/Compu-Soft/Movimientos/movimiento_entrada.php">Entrada</a></li>
       <li><a href="/Compu-Soft/Movimientos/movimiento_salida.php">Salida</a></li>
        </ul>
     </li>
-	<li><a href="#">Copia De Seguridad</a> 
+	<li><a href="#">Configuracion</a> 
       <ul>
-        <li><a href="/Compu-Soft/Backup/backup.php">Realizar Copia</a></li>
+        <li><a href="/Compu-Soft/Registros/r_articulos.php">Nuevo Articulo</a></li> 
+        <li><a href="/Compu-Soft/Registros/tipo.php">Nuevo Tipo</a></li>
+        <li><a href="/Compu-Soft/Borrar/borrar_tipo.php">Borrar Tipo</a></li>
+        <li><a href="/Compu-Soft/Borrar/borrar_movimiento.php">Borrar Movimientos</a></li>
+        <li><a href="/Compu-Soft/Backup/backup.php">Copia de Seguridad</a></li>
         </ul>
     </li>
 	<li><a href="/Compu-Soft/creditos.php">Acerca De</a> 
     </li>
 
     </li>
-    <li><a href="/Compu-Soft/logout.php">Salir</a> 
+    <li><a href="/Compu-Soft/logout.php" onclick="if(confirm('&iquest;Esta seguro que desea cerrar la sesi&oacute;n?')) return true;  else return false;" >Salir</a>  
     </li>
     </ul>
 </div>
@@ -141,8 +142,8 @@ if (!$fechainicio)
 
   
   //comenzamos la consulta 
-  //$consulta = "SELECT * FROM equipos WHERE marca like '%".$busqueda."%' ORDER BY marca ASC";
-  $consulta = "SELECT * FROM mov_compu WHERE compu_fecha >= '$fechainicio' AND compu_fecha <= '$fechafin' AND compu_tipo = 'Ingreso' ORDER BY compu_fecha DESC"; //este
+  //$consulta = "SELECT * FROM registro WHERE marca like '%".$busqueda."%' ORDER BY marca ASC";
+  $consulta = "SELECT * FROM reporte WHERE compu_fecha >= '$fechainicio' AND compu_fecha <= '$fechafin' AND tipo_m = 'Ingreso' ORDER BY compu_fecha DESC"; //este
 
   //no funciona
   $resultado = mysql_query($consulta) or die(mysql_error());
@@ -178,14 +179,14 @@ echo "<br>";
      echo "<tr bgcolor='#FFFACD'>";
    //echo "     <td><a style=\"text-decoration:underline;cursor:pointer;\" onclick=\"pedirDatos('".$row['cli_id']."')\">".$row['cli_id']."</a></td>";
      //echo "     <td>".stripslashes($row["compu_marca"])."</td>";
-   echo "     <td>".stripslashes($row["compu_modelo"])."</td>";
+   echo "     <td>".stripslashes($row["compu_tipo"])."</td>";
    //echo "     <td>".stripslashes($row["serial"])."</td>";
    echo "     <td>".stripslashes($row["compu_prov"])."</td>";
    //echo "     <td>".stripslashes($row["cliente"])."</td>";
     //echo "     <td>".stripslashes($row["dir"])."</td>";
    //echo "     <td>".stripslashes($row["tel"])."</td>";
   //echo "     <td>".stripslashes($row["garantia"])."</td>";
-   echo "     <td>".stripslashes($row["compu_qty"])."</td>";
+   echo "     <td>".stripslashes($row["compu_unidades"])."</td>";
    echo "     <td>".stripslashes($row["compu_des"])."</td>";
    echo "     <td>".stripslashes($row["compu_fecha"])."</td>";
      echo "</tr>";
