@@ -60,4 +60,20 @@ $sql_cliente2 = "SELECT DISTINCT `abono_cliente` FROM `abonos` ORDER BY `abono_c
 // FIN  construccion consulta de de los ARTICULOS-->
 ?>
 
+<?php
+// INICIO  construccion consulta de de los ARTICULOS-->
+$sql_options_tipo = "SELECT * FROM  `configuracion`"; 
+	     
+	      $result_options_tipo = mysql_query($sql_options_tipo); 
+	      $options_tipo = ''; 
+	      
+	    while ($row_options_tipo = mysql_fetch_array($result_options_tipo))
+		{	
+			
+			$options_tipo = $options_tipo.'<option value="'.$row_options_tipo['id_tipo'].'">'.$row_options_tipo['nombre_tipo'].'</option>';
+		}
+// FIN  construccion consulta de de los ARTICULOS-->
+
+?>
+
 
